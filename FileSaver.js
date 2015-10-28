@@ -233,14 +233,6 @@ var saveAs = saveAs
 // while `this` is nsIContentFrameMessageManager
 // with an attribute `content` that corresponds to the window
 
-if (typeof module !== "undefined" && module !== null) {
-    module.exports = saveAs;
-} else if ((typeof define !== "undefined" && define !== null) && (define.amd != null)) {
-    define([], function () {
-        return saveAs;
-    });
-}
-
 String.prototype.endsWithAny = function () {
     var strArray = Array.prototype.slice.call(arguments),
         $this = this.toLowerCase().toString();
@@ -292,4 +284,18 @@ var saveTextAs = saveTextAs
         saveTxtWindow.close();
         return retValue;
     }
-})
+});
+
+var api = {
+    saveAs: saveAs,
+    saveTextAs: saveTextAs
+};
+
+if (typeof module !== "undefined" && module !== null) {
+    module.exports = api;
+} else if ((typeof define !== "undefined" && define !== null) && (define.amd != null)) {
+    define([], function () {
+        return api;
+    });
+}
+
